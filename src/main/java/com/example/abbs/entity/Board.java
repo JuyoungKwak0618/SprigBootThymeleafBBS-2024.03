@@ -10,12 +10,14 @@ public class Board {
 	private LocalDateTime modTime;
 	private int isDeleted;
 	private int viewCount;
+	private int replyCount;
 	private int likeCount;
 	private String files;
+	private String uname;
 	
 	public Board() { }
 	public Board(int bid, String title, String content, String uid, LocalDateTime modTime, int isDeleted, int viewCount,
-			int likeCount, String files) {
+			int replyCount, int likeCount, String files, String uname) {
 		super();
 		this.bid = bid;
 		this.title = title;
@@ -24,8 +26,10 @@ public class Board {
 		this.modTime = modTime;
 		this.isDeleted = isDeleted;
 		this.viewCount = viewCount;
+		this.replyCount = replyCount;
 		this.likeCount = likeCount;
 		this.files = files;
+		this.uname = uname;
 	}
 	
 	@Override
@@ -82,11 +86,24 @@ public class Board {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	public String getFiles() {
 		return files;
 	}
 	public void setFiles(String files) {
 		this.files = files;
 	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	
 	
 }
