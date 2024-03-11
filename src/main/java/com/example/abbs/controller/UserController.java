@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ public class UserController {
 	@Autowired private UserService uSvc;
 	@Autowired private ImageUtil imageUtil;
 	@Autowired private AsideUtil asideUtil;
+	@Autowired private ResourceLoader resourceLoader;
 	@Value("${spring.servlet.multipart.location}") private String uploadDir;
 
 	@GetMapping("/register")
@@ -90,11 +93,18 @@ public class UserController {
 			session.setAttribute("location", user.getLocation());
 			
 			//상태 메세지
-			String quoteFile = uploadDir + "data/todayQuote.txt";
+			// c:/Temp/abbs/data/todayQuote.txt
+//			String quoteFile = uploadDir + "data/todayQuote.txt";
+			// resources/static/data/todayQuote.txt
+			Resource resource = resourceLoader.getResource("classpath:/static/data/todayQuote.txt");
+			String quoteFile = null;
+			try {
+				quoteFile = resource.getURI().getPath();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			String stateMsg = asideUtil.getTodayQuote(quoteFile);
 			session.setAttribute("stateMsg", stateMsg);
-			
-			
 			//환영 메세지
 			log.info("Info Login: {}, {} " , uid, user.getUname());
 			model.addAttribute("msg",user.getUname()+"님 환영합니다.");
