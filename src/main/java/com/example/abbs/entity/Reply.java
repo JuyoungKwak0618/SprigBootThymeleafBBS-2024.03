@@ -9,9 +9,17 @@ public class Reply {
 	private String uid;
 	private int bid;
 	private int isMine;
+	private String uname;
 	
 	public Reply() { }
-	public Reply(int rid, String comment, LocalDateTime regTime, String uid, int bid, int isMine) {
+	public Reply(String comment, String uid, int bid, int isMine) {
+		super();
+		this.comment = comment;
+		this.uid = uid;
+		this.bid = bid;
+		this.isMine = isMine;
+	}
+	public Reply(int rid, String comment, LocalDateTime regTime, String uid, int bid, int isMine, String uname) {
 		super();
 		this.rid = rid;
 		this.comment = comment;
@@ -19,8 +27,8 @@ public class Reply {
 		this.uid = uid;
 		this.bid = bid;
 		this.isMine = isMine;
+		this.uname = uname;
 	}
-	
 	@Override
 	public String toString() {
 		return "Reply [rid=" + rid + ", comment=" + comment + ", regTime=" + regTime + ", uid=" + uid + ", bid=" + bid
@@ -62,6 +70,12 @@ public class Reply {
 	}
 	public void setIsMine(int isMine) {
 		this.isMine = isMine;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 	
 }

@@ -33,3 +33,32 @@ function getWeather() {
     }
   });
 }
+
+function uploadProfileImage() {
+  var fileInput = document.getElementById('profileImageInput');
+  var file = fileInput.files[0];
+  if (file) {
+    var formData = new FormData();
+    formData.append('profile', profile);
+
+    $.ajax({
+        type: 'POST',
+        url: '/abbs/aside/uploadProfileImage', // 이미지 업로드를 처리하는 컨트롤러의 URL로 변경해야 합니다.
+        data: formData,
+        dataType:'json',
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            // 성공 시 처리
+            console.log('이미지 업로드 성공:', data);
+            // 필요한 경우 페이지를 새로고침하거나 이미지를 변경하는 등의 작업을 수행할 수 있습니다.
+        },
+        error: function (error) {
+            // 실패 시 처리
+            console.error('이미지 업로드 실패:', error);
+        }
+    });
+} else {
+    console.warn('파일을 선택하세요.');
+}
+}

@@ -15,7 +15,7 @@
 			a { text-decoration: none; }
 			.disabled-link { pointer-events: none; }
 		</style>
-		<script src="/abbs/js/aside.js?v=3"></script>
+		<script src="/abbs/js/aside.js?v=4"></script>
 	</header>
 </head>
 <body>
@@ -56,18 +56,21 @@
 			<div class="col-3">
 				<aside th:fragment="aside">
 					<div th:if="${session.profile}">
-						<img th:src="@{/file/profile/{x}(x=${session.profile})}" alt="" class="rounded-circle" width="90%">
+						<img th:src="@{/file/profile/{x}(x=${session.profile})}" class="rounded-circle" width="90%">
+						<input type="file" id="profileImageInput" accept="image/*">
+						<button onclick="uploadProfileImage()">이미지 업로드</button>
 					</div>
 					<div th:unless="${session.profile}">
 						<img src="/abbs/img/person.png" class="rounded-circle" width="90%">
 					</div>
+
 					<div class="mt-2">
-						<span id ="stateMsg">[[${session.stateMsg}]]</span>
+						<span id="stateMsg">[[${session.stateMsg}]]</span>
 						<a href="#" id="stateMsgBtn"><span class="badge bg-secondary">수정</span></a>
 					</div>
-					<div id="stateMsgInput" class="mt-2 d-none">	<!--display none-->
+					<div id="stateMsgInput" class="mt-2 d-none">
 						<input class="form-control form-control-sm" type="text" id="stateInput"
-							onkeyup="if(window.event.keyCode==13) {changeStateMsg()}">
+									onkeyup="if(window.event.keyCode==13) {changeStateMsg()}">
 						<a href="#" id="stateMsgSubmit"><span class="badge bg-primary">확인</span></a>
 					</div>
 
