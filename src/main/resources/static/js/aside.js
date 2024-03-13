@@ -39,7 +39,7 @@ function uploadProfileImage() {
   var file = fileInput.files[0];
   if (file) {
     var formData = new FormData();
-    formData.append('profile', profile);
+    formData.append('profile', file);
 
     $.ajax({
         type: 'POST',

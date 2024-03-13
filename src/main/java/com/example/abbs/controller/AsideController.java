@@ -34,12 +34,12 @@ public class AsideController {
 		return "return message";
 	}
 	
-	@PostMapping("/uploadProfileImage")
-	public String uploadProfileImage(@RequestParam("profile") MultipartFile file,HttpSession session) {
-		String filename = file.getOriginalFilename();
-		session.setAttribute("profile",filename);
-		return "fragments/base";
-	}
+//	@PostMapping("/uploadProfileImage")
+//	public String uploadProfileImage(@RequestParam("profile") MultipartFile file,HttpSession session) {
+//		String filename = file.getOriginalFilename();
+//		session.setAttribute("profile",filename);
+//		return "fragments/base";
+//	}
 		
 	
 	
