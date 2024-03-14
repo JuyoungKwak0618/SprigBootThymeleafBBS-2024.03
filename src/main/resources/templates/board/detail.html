@@ -7,12 +7,17 @@
 	</style>
 	<script th:inline="javascript">
 		function likeClick(bid) {
+			let oldCount = $('#likeCount').text();
 			$.ajax({
 				type: 'GET',
 				url: '/abbs/board/like/' + bid,
 				success: function(count) {
 					$('#likeCount').replaceWith(count);
-					location.reload();					// 잠정적
+					let newCount = $('#likeCount').text();
+					if (oldCount > newCount) 
+						$('#likeIcon').attr({'class': 'fa-regular fa-thumbs-up'}); 	// 좋아요 취소
+					else
+						$('#likeIcon').attr({'class': 'fa-solid fa-thumbs-up'});		// 좋아요 누름
 				}
 			});
 		}
@@ -63,8 +68,8 @@
 							<h6>
 								<span th:if="${session.sessUid eq board.uid}">	<!-- 본인은 좋아요 누르지 못함 -->
 									<a href="#">
-										<span id="likeIcon" th:if="${session.likeClicked == 1}"><i class="fa-solid fa-thumbs-up"></i></span>
-										<span id="likeIcon" th:if="${session.likeClicked == 0}"><i class="fa-regular fa-thumbs-up"></i></span>
+										<span  th:if="${session.likeClicked == 1}"><i id="likeIcon" class="fa-solid fa-thumbs-up"></i></span>
+										<span  th:if="${session.likeClicked == 0}"><i id="likeIcon" class="fa-regular fa-thumbs-up"></i></span>
 										[[${count}]]
 									</a>
 								</span>
